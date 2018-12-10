@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './marvel_logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -8,21 +8,23 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <p className="help">Select one category to have access to amazing content</p>
         </header>
+          <button type="button" className="button">Characters</button>
+          <button type="button" className="button">Comics</button>
+          <button type="button" className="button">Creators</button>
+          <button type="button" className="button">Events</button>
+          <button type="button" className="button">Series</button>
+          <button type="button" className="button">Stories</button>
+        <footer>
+           <p className="help">Posted by: Gosse Brandon & Bonnot Jordan</p>
+           <p className="help">Github link: <a href="https://github.com/BonnotJordan/ReactProject">
+           Github Project Marvel</a>.</p>
+       </footer>
       </div>
     );
   }
+
 }
 
 export default App;
