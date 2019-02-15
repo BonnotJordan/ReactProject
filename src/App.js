@@ -1,17 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import logo from './marvel_logo.svg';
 import './App.css';
+import List from './List'
 
-class App extends Component {
+class App extends React.Component {
+  
   constructor(props) {
     super(props);
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this);
   }
+
+
+/*handleChange(){
+
+}*/
+
+
+
   handleClick(e) {
     e.preventDefault();
-    console.log("Item clicked : " + e.currentTarget.lastChild.data);
-    if(e.currentTarget.lastChild.data === "Characters"){
+    //console.log("Item clicked : " + e.currentTarget.lastChild.data);
+    /*if(e.currentTarget.lastChild.data === "Characters"){
       console.log("Vous allez récupérer des Characters");
       
     } else if (e.currentTarget.lastChild.data === "Comics") {
@@ -24,30 +34,35 @@ class App extends Component {
       console.log("Vous allez récupérer des Series");
     } else if (e.currentTarget.lastChild.data === "Stories") {
       console.log("Vous allez récupérer des Stories");
-    }
+    }*/
   };
+
+
   render() {
     return (
+
       <div className="App">
-        <header className="App-header">
+       <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p className="help">Select one category to have access to amazing content</p>
+          <p className="help">Search something by tiping it on the search bar or use the list</p>
         </header>
-          <button type="button" className="button" onClick= {this.handleClick}>Characters</button>
-          <button type="button" className="button" onClick= {this.handleClick}>Comics</button>
-          <button type="button" className="button" onClick= {this.handleClick}>Creators</button>
-          <button type="button" className="button" onClick= {this.handleClick}>Events</button>
-          <button type="button" className="button" onClick= {this.handleClick}>Series</button>
-          <button type="button" className="button" onClick= {this.handleClick}>Stories</button>
-        <footer>
+       <List />
+       <footer>
            <p className="help">Posted by: Gosse Brandon & Bonnot Jordan</p>
            <p className="help">Github link: <a href="https://github.com/BonnotJordan/ReactProject">
            Github Project Marvel</a>.</p>
        </footer>
       </div>
     );
+    
   }
 
 }
 
-export default App;
+
+
+export default App
+
+
+
+//<input type="text" className="input" onChange={this.handleChange} placeholder="Search..." />
