@@ -64,5 +64,3 @@ class App extends React.Component {
 export default App
 
 
-
-//<input type="text" className="input" onChange={this.handleChange} placeholder="Search..." />
