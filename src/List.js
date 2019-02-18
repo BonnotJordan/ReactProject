@@ -10,38 +10,53 @@ var numberOfResult = 0;
 function createList(data) {
   console.log(numberOfResult)
   var all = [];
-for(var i=0;i<numberOfResult;i++){
-  console.log(i)
-  console.log(data.data.results[i].name)
-  const element = <ListItem button><ListItemText primary={data.data.results[i].name}></ListItemText></ListItem>;
-  all.push(element)
-}
-ReactDOM.render(all, document.getElementById('List'));
+  for(var i=0;i<numberOfResult;i++){
+    const element = <ListItem button><ListItemText primary={data.data.results[i].name}></ListItemText></ListItem>;
+    all.push(element)
+  }
+  return all
 }
 
 function loadAllCharacters()  {
-  
-  var urlDefault = "http://gateway.marvel.com/v1/public/characters?apikey=cc6ba08adc1a5d416f236d8712e9ed31&ts=1597532846&hash=794436f24dd054dead6d8c0950a0dff7";
-  
-  fetch(urlDefault)
-  .then(response => response.json())
-      .then(data => {
-          console.log(data)
-          numberOfResult = data.data.count
-          createList(data)
-  })
-  .catch(err => console.error(this.props.url, err.toString()))
+  if(this.state.query) {
+    var uRLWithName = "http://gateway.marvel.com/v1/public/characters?nameStartsWith=" + this.state.query + "&apikey=cc6ba08adc1a5d416f236d8712e9ed31&ts=1597532846&hash=794436f24dd054dead6d8c0950a0dff7";
+    return fetch(uRLWithName)
+  } else {
+    var urlDefault = "http://gateway.marvel.com/v1/public/characters?apikey=cc6ba08adc1a5d416f236d8712e9ed31&ts=1597532846&hash=794436f24dd054dead6d8c0950a0dff7";
+    return fetch(urlDefault)
+  }
   
 }
 
 class List extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: ""
+    }
+    
+  }
+
   componentDidMount() {
     loadAllCharacters()
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        numberOfResult = data.data.count
+        var allDatas = createList(data)
+        React.render(allDatas)
+})
+.catch(err => console.error(this.props.url, err.toString()))
+  }
+
+  componentDidUpdate() {
+
   }
     
     handleChange(searchText) {
-      if(searchText.target.value.length === 0){
+      setState({query: searchText.target.value});
+      /*if(searchText.target.value.length === 0){
         loadAllCharacters()
       } else {
         var uRLWithName = "http://gateway.marvel.com/v1/public/characters?nameStartsWith=" + searchText.target.value + "&apikey=cc6ba08adc1a5d416f236d8712e9ed31&ts=1597532846&hash=794436f24dd054dead6d8c0950a0dff7";
@@ -55,7 +70,7 @@ class List extends React.Component {
                 createList(data)
         })
         .catch(err => console.error(this.props.url, err.toString()))
-      }
+      }*/
     }
     
     
