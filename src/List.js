@@ -48,9 +48,9 @@ class List extends React.Component {
         var allDatas = createList(data)
         this.state.numberOfResultToDisplay = data.data.count
         //React.render()
-})
-.catch(err => console.error(this.props.url, err.toString()))
-}
+    })
+    .catch(err => console.error(this.props.url, err.toString()))
+  }
 
 
 
@@ -58,40 +58,32 @@ class List extends React.Component {
 
   }
     
-    handleChange(e) {
-      console.log(e.target.value)
-      this.state.query = e.target.value
-      //this.setState({query: e.target.value})
-      console.log(this.state.query)
-      this.loadData()
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        this.state.numberOfResultToDisplay = data.data.count
-        var allDatas = createList(data)
-        //React.render(allDatas)
-      })
-      .catch(err => console.error(this.props.url, err.toString()))
-    }
+  handleChange(e) {
+    console.log(e.target.value)
+    this.state.query = e.target.value
+    //this.setState({query: e.target.value})
+    console.log(this.state.query)
+    this.loadData()
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      this.state.numberOfResultToDisplay = data.data.count
+      var allDatas = createList(data)
+      //React.render(allDatas)
+    })
+    .catch(err => console.error(this.props.url, err.toString()))
+  }
     
-    
-
-    render() {
-      return (
-        
-        <div className="parent">
+  render() {
+    return ( 
+      <div className="parent">
         <div className="Search">
-            <input type="text" className="input" onChange={this.handleChange.bind(this)} placeholder="Search..." />                    
+          <input type="text" className="input" onChange={this.handleChange.bind(this)} placeholder="Search..." />                    
         </div>
-        <div id="List">
-        
-
-                        
-        </div>
-            
-        </div>
-      );
-      
+        <div id="List">   
+        </div>    
+      </div>
+    );  
     }
   }
   
