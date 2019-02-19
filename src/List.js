@@ -5,7 +5,7 @@ import Link from '@material-ui/core/Link';
 import ListItemText from '@material-ui/core/ListItemText';
 import './List.css';
 
-var NUMBER_OF_RESULTS_TO_DISPLAY = 20;
+var NUMBER_OF_RESULTS_TO_DISPLAY = 0;
 
 function createList(data) {
   var all = [];
@@ -46,6 +46,7 @@ class List extends React.Component {
     .then(data => {
         console.log(data)
         var allDatas = createList(data)
+        NUMBER_OF_RESULTS_TO_DISPLAY = data.data.count
         //React.render()
 })
 .catch(err => console.error(this.props.url, err.toString()))
@@ -59,12 +60,14 @@ class List extends React.Component {
     
     handleChange(e) {
       console.log(e.target.value)
-      this.setState({query: e.target.value})
+      this.state.query = e.target.value
+      //this.setState({query: e.target.value})
       console.log(this.state.query)
       this.loadData()
       .then(response => response.json())
       .then(data => {
         console.log(data)
+        NUMBER_OF_RESULTS_TO_DISPLAY = data.data.count
         var allDatas = createList(data)
         //React.render(allDatas)
       })
@@ -78,7 +81,7 @@ class List extends React.Component {
         
         <div className="parent">
         <div className="Search">
-            <input type="text" value={this.state.query} className="input" onChange={this.handleChange.bind(this)} placeholder="Search..." />                    
+            <input type="text" className="input" onChange={this.handleChange.bind(this)} placeholder="Search..." />                    
         </div>
         <div id="List">
         
