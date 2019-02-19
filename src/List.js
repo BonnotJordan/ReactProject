@@ -5,11 +5,10 @@ import Link from '@material-ui/core/Link';
 import ListItemText from '@material-ui/core/ListItemText';
 import './List.css';
 
-var NUMBER_OF_RESULTS_TO_DISPLAY = 0;
 
 function createList(data) {
   var all = [];
-  for(var i=0;i<NUMBER_OF_RESULTS_TO_DISPLAY;i++){
+  for(var i=0;i<this.state.numberOfResultToDisplay;i++){
     const element = <ListItem button><ListItemText primary={data.data.results[i].name}></ListItemText></ListItem>;
     all.push(element)
   }
@@ -23,7 +22,8 @@ class List extends React.Component {
   constructor(props) {
     super(props) 
     this.state = {
-      query: ""
+      query: "",
+      numberOfResultToDisplay: 0
     }
   }
 
@@ -46,7 +46,7 @@ class List extends React.Component {
     .then(data => {
         console.log(data)
         var allDatas = createList(data)
-        NUMBER_OF_RESULTS_TO_DISPLAY = data.data.count
+        this.state.numberOfResultToDisplay = data.data.count
         //React.render()
 })
 .catch(err => console.error(this.props.url, err.toString()))
@@ -67,7 +67,7 @@ class List extends React.Component {
       .then(response => response.json())
       .then(data => {
         console.log(data)
-        NUMBER_OF_RESULTS_TO_DISPLAY = data.data.count
+        this.state.numberOfResultToDisplay = data.data.count
         var allDatas = createList(data)
         //React.render(allDatas)
       })
