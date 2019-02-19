@@ -5,72 +5,70 @@ import Link from '@material-ui/core/Link';
 import ListItemText from '@material-ui/core/ListItemText';
 import './List.css';
 
-var numberOfResult = 0;
+var NUMBER_OF_RESULTS_TO_DISPLAY = 20;
 
 function createList(data) {
-  console.log(numberOfResult)
   var all = [];
-  for(var i=0;i<numberOfResult;i++){
+  for(var i=0;i<NUMBER_OF_RESULTS_TO_DISPLAY;i++){
     const element = <ListItem button><ListItemText primary={data.data.results[i].name}></ListItemText></ListItem>;
     all.push(element)
   }
   return all
 }
 
-function loadAllCharacters()  {
-  if(this.state.query) {
-    var uRLWithName = "http://gateway.marvel.com/v1/public/characters?nameStartsWith=" + this.state.query + "&apikey=cc6ba08adc1a5d416f236d8712e9ed31&ts=1597532846&hash=794436f24dd054dead6d8c0950a0dff7";
-    return fetch(uRLWithName)
-  } else {
-    var urlDefault = "http://gateway.marvel.com/v1/public/characters?apikey=cc6ba08adc1a5d416f236d8712e9ed31&ts=1597532846&hash=794436f24dd054dead6d8c0950a0dff7";
-    return fetch(urlDefault)
-  }
-  
-}
+ 
 
 class List extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props) 
     this.state = {
       query: ""
+    }
+  }
+
+  loadData()  {
+    if(this.state.query) {
+      console.log("withQuery")
+      var uRLWithName = "http://gateway.marvel.com/v1/public/characters?nameStartsWith=" + this.state.query + "&apikey=cc6ba08adc1a5d416f236d8712e9ed31&ts=1597532846&hash=794436f24dd054dead6d8c0950a0dff7";
+      return fetch(uRLWithName)
+    } else {
+      console.log("withoutQuery")
+      var urlDefault = "http://gateway.marvel.com/v1/public/characters?apikey=cc6ba08adc1a5d416f236d8712e9ed31&ts=1597532846&hash=794436f24dd054dead6d8c0950a0dff7";
+      return fetch(urlDefault)
     }
     
   }
 
   componentDidMount() {
-    loadAllCharacters()
+    this.loadData()
     .then(response => response.json())
     .then(data => {
         console.log(data)
-        numberOfResult = data.data.count
         var allDatas = createList(data)
-        React.render(allDatas)
+        //React.render()
 })
 .catch(err => console.error(this.props.url, err.toString()))
-  }
+}
+
+
 
   componentDidUpdate() {
 
   }
     
-    handleChange(searchText) {
-      setState({query: searchText.target.value});
-      /*if(searchText.target.value.length === 0){
-        loadAllCharacters()
-      } else {
-        var uRLWithName = "http://gateway.marvel.com/v1/public/characters?nameStartsWith=" + searchText.target.value + "&apikey=cc6ba08adc1a5d416f236d8712e9ed31&ts=1597532846&hash=794436f24dd054dead6d8c0950a0dff7";
-        console.log(uRLWithName)
-        fetch(uRLWithName)
-        .then(response => response.json())
-            .then(data => {
-                numberOfResult = data.data.count
-                console.log(data)
-                console.log()
-                createList(data)
-        })
-        .catch(err => console.error(this.props.url, err.toString()))
-      }*/
+    handleChange(e) {
+      console.log(e.target.value)
+      this.setState({query: e.target.value})
+      console.log(this.state.query)
+      this.loadData()
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        var allDatas = createList(data)
+        //React.render(allDatas)
+      })
+      .catch(err => console.error(this.props.url, err.toString()))
     }
     
     
@@ -80,7 +78,7 @@ class List extends React.Component {
         
         <div className="parent">
         <div className="Search">
-            <input type="text" className="input" onChange={this.handleChange} placeholder="Search..." />                    
+            <input type="text" value={this.state.query} className="input" onChange={this.handleChange.bind(this)} placeholder="Search..." />                    
         </div>
         <div id="List">
         
