@@ -24,7 +24,7 @@ class App extends React.Component {
   handleClick(e) {
     e.preventDefault();
     //console.log("Item clicked : " + e.currentTarget.lastChild.data);
-    if(e.currentTarget.lastChild.data === "Characters"){
+    /*if(e.currentTarget.lastChild.data === "Characters"){
       console.log("Vous allez récupérer des Characters");
       this.state.selectedButtonId = 0
     } else if (e.currentTarget.lastChild.data === "Comics") {
@@ -42,7 +42,7 @@ class App extends React.Component {
     } else if (e.currentTarget.lastChild.data === "Stories") {
       console.log("Vous allez récupérer des Stories");
       this.state.selectedButtonId = 5
-    }
+    }*/
   };
 
 
@@ -54,14 +54,7 @@ class App extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <p className="help">Search something by tiping it on the search bar or use the list</p>
         </header>
-       <div className="Buttons">
-       <button type="button" className="button" onClick= {this.handleClick}>Characters</button>
-          <button type="button" className="button" onClick= {this.handleClick}>Comics</button>
-          <button type="button" className="button" onClick= {this.handleClick}>Creators</button>
-          <button type="button" className="button" onClick= {this.handleClick}>Events</button>
-          <button type="button" className="button" onClick= {this.handleClick}>Series</button>
-          <button type="button" className="button" onClick= {this.handleClick}>Stories</button>
-       </div>
+       
        <List className="itsaList"/>
        <footer className="App-footer">
            <p className="help">Posted by: Gosse Brandon & Bonnot Jordan</p>
@@ -80,3 +73,11 @@ class App extends React.Component {
 export default App
 
 
+/*<div className="Buttons">
+       <button type="button" className="button" onClick= {this.handleClick}>Characters</button>
+          <button type="button" className="button" onClick= {this.handleClick}>Comics</button>
+          <button type="button" className="button" onClick= {this.handleClick}>Creators</button>
+          <button type="button" className="button" onClick= {this.handleClick}>Events</button>
+          <button type="button" className="button" onClick= {this.handleClick}>Series</button>
+          <button type="button" className="button" onClick= {this.handleClick}>Stories</button>
+       </div>*/
