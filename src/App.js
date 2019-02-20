@@ -2,6 +2,12 @@ import React from 'react';
 import logo from './marvel_logo.svg';
 import './App.css';
 import List from './List'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
+import Details from './Details'
 
 class App extends React.Component {
   
@@ -54,8 +60,12 @@ class App extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <p className="help">Search something by tiping it on the search bar or use the list</p>
         </header>
-       
-       <List className="itsaList"/>
+       <Router>
+         <Switch>
+           <Route exact path="/" component={List}/>
+           <Route path="/details" component={Details}/>
+         </Switch>
+       </Router>
        <footer className="App-footer">
            <p className="help">Posted by: Gosse Brandon & Bonnot Jordan</p>
            <p className="help">Github link: <a href="https://github.com/BonnotJordan/ReactProject">

@@ -1,11 +1,15 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import ListMaterial from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
-import Link from '@material-ui/core/Link';
 import ListItemText from '@material-ui/core/ListItemText';
 import './List.css';
 import { Button } from '@material-ui/core';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link
+} from 'react-router-dom'
 
 
 
@@ -40,15 +44,15 @@ class List extends React.Component {
     
   }
 
-  handleClick(event) {
+  handleClick(event, id) {
     console.log("Clicked on ",event)
-    //here open new page for details
+    window.location.assign('/details/' + id);
   }
 
   createList(data) {
     var allDatasTest = []
     for(var i=0;i<this.state.numberOfResultToDisplay;i++){
-      const element = <ListItem button onClick={this.handleClick.bind(this, data.data.results[i].name)} value={data.data.results[i].name} key={data.data.results[i].id}><ListItemText primary={data.data.results[i].name}></ListItemText></ListItem>;
+      const element = <ListItem  button onClick={this.handleClick.bind(this, data.data.results[i].name, data.data.results[i].id)} value={data.data.results[i].name} key={data.data.results[i].id}><ListItemText primary={data.data.results[i].name}></ListItemText></ListItem>;
       const element2 = <button type="button" onClick={this.handleClick.bind(this)} value={data.data.results[i].name}>Hello</button>
       allDatasTest.push(element)
       console.log("create a element")
