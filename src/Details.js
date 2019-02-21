@@ -26,7 +26,7 @@ class Details extends React.Component {
         this.setState({
           name: data.data.results[0].name,
           description: data.data.results[0].description,
-          image: "",
+          image: data.data.results[0].thumbnail.path + "/portrait_incredible.jpg",
           isLoading: false
         })
     })
@@ -39,9 +39,10 @@ class Details extends React.Component {
             <h1>
                 {this.state.name}
             </h1>
-            <h2>
+            <h4>
               {this.state.description}
-            </h2>
+            </h4>
+            <img src={this.state.image}></img>
       </div>
     );  
     }
