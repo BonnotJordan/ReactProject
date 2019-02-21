@@ -63,7 +63,7 @@ class App extends React.Component {
        <Router>
          <Switch>
            <Route exact path="/" component={List}/>
-           <Route path="/details" component={Details}/>
+           <Route path="/details/:id" component={Details}/>
          </Switch>
        </Router>
        <footer className="App-footer">
