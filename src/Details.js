@@ -42,11 +42,11 @@ class Details extends React.Component {
             <h4>
               {this.state.description}
             </h4>
-            <img src={this.state.image}></img>
+            <img src={this.state.image} alt = "Character"></img>
       </div>
     );  
     }
   }
   
   
-  export default Details // image sample : http://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec/portrait_incredible.jpg
+  export default Details
